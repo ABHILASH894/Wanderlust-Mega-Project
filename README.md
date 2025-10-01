@@ -75,13 +75,6 @@ sudo apt-get update
 ```bash
 sudo apt-get install docker.io -y
 sudo usermod -aG docker ubuntu && newgrp docker
-sudo usermod -aG docker jenkins  #Also ADD jenkins to a docker group
-sudo systemctl restart jenkins
-groups jenkins   #to verify
-ls -l /var/run/docker.sock   #Ensure the Docker socket is accessible
-sudo chown root:docker /var/run/docker.sock   #If not, fix it
-sudo chmod 660 /var/run/docker.sock
-
 ```
 #
 - <b id="Jenkins">Install and configure Jenkins (Master machine)</b>
@@ -98,6 +91,12 @@ echo "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc]" \
   
 sudo apt-get update -y
 sudo apt-get install jenkins -y
+sudo usermod -aG docker jenkins  #Also ADD jenkins to a docker group
+sudo systemctl restart jenkins
+groups jenkins   #to verify
+ls -l /var/run/docker.sock   #Ensure the Docker socket is accessible
+sudo chown root:docker /var/run/docker.sock   #If not, fix it
+sudo chmod 660 /var/run/docker.sock
 ```
 - <b>Now, access Jenkins Master on the browser on port 8080 and configure it</b>.
 #
